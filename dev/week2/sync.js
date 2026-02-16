@@ -13,12 +13,17 @@
 
 const fs = require("fs")
 
-let data = fs.readFile("a.txt","utf-8")
-console.log(data);
 
 console.log("hi")
 
-data = fs.readFile("b.txt","utf-8")
-console.log(data);
+fs.readFile("b.txt","utf-8",(err,data)=>{
+    console.log(data);
+    
+})
 
-console.log("done")
+let num = 0;
+for (let index = 0; index < 10000000; index++) {
+    num = num+index;    
+}
+console.log(num)
+
