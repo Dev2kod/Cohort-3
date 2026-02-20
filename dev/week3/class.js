@@ -9,19 +9,14 @@ const user = {
 console.log(user.name);
 
 //classes and constructor
-
-
-//classes 
-
 class rectangle{
     constructor(height,width,color){
         this.height = height
         this.width = width
         this.color = color
     }
-
     area(){
-        const area = this.length * this.width
+        const area = this.height * this.width
         return area;
     }
     paint(){
@@ -38,14 +33,29 @@ console.log(area1);
 const shape1 = new rectangle(10,20,"blue")
 shape1.paint()
 
+
+
+//inheritance
 class animal{
-    constructor(legs,sound,breed){
+    constructor(legs,sound){
         this.legs = legs
         this.sound = sound
-        this.breed = breed
     }
 }
 
-const dog = new animal(4,"bhow bhow","retriever")
+class dog extends animal{
+    constructor(name,breed){
+        super(4,"whoof")
+        this.name = name;
+        this.breed = breed
+    }
+    bark(){
+        console.log(`${this.name} says ${this.sound} !!!`); 
+    }
+}
 
-console.log(dog.breed)
+const leo = new dog("leo","lab")
+
+leo.bark()
+
+
