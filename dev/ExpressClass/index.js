@@ -43,7 +43,11 @@ app.put("/treat",(req,res)=>{
 })
 
 app.post("/addData",(req,res)=>{
-    
+    const {username,pass} = req.body
+    res.json({
+        username: username,
+        pass : pass
+    })
 })
 
 app.listen(3000,()=>{console.log("running on 3000");
