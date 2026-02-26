@@ -42,5 +42,9 @@ app.put("/treat",(req,res)=>{
     })
 })
 
+app.post("/addData",(req,res)=>{
+    
+})
+
 app.listen(3000,()=>{console.log("running on 3000");
 })
