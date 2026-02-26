@@ -7,55 +7,29 @@ const user = {
 }
 
 console.log(user.name);
-
-//classes and constructor
+//classes 
 class rectangle{
     constructor(height,width,color){
         this.height = height
         this.width = width
         this.color = color
     }
-    area(){
-        const area = this.height * this.width
-        return area;
-    }
     paint(){
-        console.log(`coloring the rectangle with ${this.color} color`)
+        console.log(`painting the rectangle with ${this.color}`);
+        
     }
 }
-
-const rec1 = new rectangle(2,4,"blue")
-rec1.paint()
-const area1 = rec1.area()
-console.log(area1);
-
-
 const shape1 = new rectangle(10,20,"blue")
 shape1.paint()
-
-
-
-//inheritance
 class animal{
-    constructor(legs,sound){
+    constructor(legs,sound,breed){
         this.legs = legs
         this.sound = sound
-    }
-}
-
-class dog extends animal{
-    constructor(name,breed){
-        super(4,"whoof")
-        this.name = name;
         this.breed = breed
     }
-    bark(){
-        console.log(`${this.name} says ${this.sound} !!!`); 
-    }
 }
 
-const leo = new dog("leo","lab")
+const dog = new animal(4,"bhow bhow","retriever")
+console.log(dog.breed)
 
-leo.bark()
-
-
+const shape2 = new rectangle()
