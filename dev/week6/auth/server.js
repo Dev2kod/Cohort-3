@@ -26,8 +26,17 @@ app.post("/signup",(req,res)=>{
 
 app.post("/signin",(req,res)=>{
     const {username,password} = req.body;
-
-    let 
+    const userExist = false
+    if(users.find((u)=>u.username==username)){
+        userExist = true
+    }
+    if(!userExist){
+        res.json({
+            msg: "user doesnt exist"
+        })
+        return;
+    }
+    
 })
 
 app.listen(3000,()=>{console.log("port running on port 3000");
