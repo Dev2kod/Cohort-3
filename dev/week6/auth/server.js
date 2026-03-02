@@ -1,43 +1,73 @@
-const express = require("express")
-const jwt = require("jsonwebtoken")
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const jwt_secret = "8329616635"
+const app = express();
+app.use(express.json());
 
-const app = express()
+let users = [];
 
-let users = []
+// SIGNUP
+app.post("/signup", (req, res) => {
+    const { username, password } = req.body;
 
-app.post("/signup",(req,res)=>{
-    const {username,password} = req.body;
-    if(users.find(u=>u.username = username)){
-        res.json({
+    const userExists = users.find(
+        u => u.username === username
+    );
+
+    if (userExists) {
+        return res.json({
             msg: "user already exist"
-        })
-        return;
+        });
     }
-    
-    users.push({
-        username : username,
-        password : password
-    })
+
+    users.push({ username, password });
 
     res.json({
         msg: "signup successful"
-    })
-})
+    });
+});
 
 app.post("/signin",(req,res)=>{
-    const {username,password} = req.body;
-    const userExist = false
-    if(users.find((u)=>u.username==username)){
-        userExist = true
-    }
-    if(!userExist){
-        res.json({
-            msg: "user doesnt exist"
-        })
-        return;
-    }
-    
+   const {username,password} = req.body;
+   
+   const user = users.find(u=>u.username == username && u.password==password)
+
+   if(user){
+    const token = jwt.sign({
+        username : user.username
+    },jwt_secret)
+    user.token = token; 
+    res.send({
+        token
+    });
+    console.log(users);
+}else{
+    res.json({
+        msg: "invalid Credentials"
+    }).status(403)
+}
 })
 
-app.listen(3000,()=>{console.log("port running on port 3000");
+
+app.get("/me",(req,res)=>{
+    const token = req.headers.authorization;
+    const userDetails = jwt.verify(token,jwt_secret)
+
+    const username = userDetails.username;
+    const user = users.find(u=>u.username == username)
+
+    if(user){
+        res.status(200).send({
+            username: user.username
+        })
+    }else{
+        res.status(401).send({
+            msg: "unauthorized"
+        })
+    }
 })
+
+
+app.listen(3000, () => {
+    console.log("port running on port 3000");
+});
