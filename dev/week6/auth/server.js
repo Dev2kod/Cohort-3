@@ -1,6 +1,8 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const jwt_secret = "8329616635"
+const {auth} = require("./middleware")
+
 const app = express();
 app.use(express.json());
 
@@ -49,12 +51,9 @@ app.post("/signin",(req,res)=>{
 })
 
 
-app.get("/me",(req,res)=>{
-    const token = req.headers.authorization;
-    const userDetails = jwt.verify(token,jwt_secret)
+app.get("/me",auth,(req,res)=>{
 
-    const username = userDetails.username;
-    const user = users.find(u=>u.username == username)
+    const user= req.user;
 
     if(user){
         res.status(200).send({
