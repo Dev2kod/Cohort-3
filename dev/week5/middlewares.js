@@ -1,13 +1,13 @@
-let i = 0;
+    let i = 0;
 
-const apiCount=(req,res,next)=>{
-    i= i+1;
-    next();
-}
+    const apiCount=(req,res,next)=>{
+        i= i+1;
+        next();
+    }
 
-const getCount = ()=>{
-    return i
-}
+    const getCount = ()=>{
+        return i
+    }
 
 
-module.exports = {getCount,apiCount}
+    module.exports = {getCount,apiCount}
