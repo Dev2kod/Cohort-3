@@ -14,7 +14,7 @@ const checkJwt = (req,res,next)=>{
         res.status(403).send({
             msg : "unauthorized"
         })
-        return;
+        rseturn;
     }
     req.user = user.username
     next()

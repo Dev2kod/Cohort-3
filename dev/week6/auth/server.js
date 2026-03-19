@@ -30,24 +30,28 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/signin",(req,res)=>{
-   const {username,password} = req.body;
-   
-   const user = users.find(u=>u.username == username && u.password==password)
+    const token = req.headers.authorization;
+ 
+    if(!token){
+        res.status(403).send({
+            msg : "unauthorized, token not found"
+        })
+    }
 
-   if(user){
-    const token = jwt.sign({
-        username : user.username
-    },jwt_secret)
-    user.token = token; 
-    res.send({
-        token
-    });
-    console.log(users);
-}else{
-    res.json({
-        msg: "invalid Credentials"
-    }).status(403)
-}
+    if(token){
+        jwt.verify(token,jwt_secret,(err,decoded)=>{
+            if(err){
+                res.status(403).json({
+                    msg: "unauthorised, token verification failed"
+                })
+            }else{
+                req.user = decoded;
+                next()
+            }
+
+        })
+    }
+
 })
 
 
