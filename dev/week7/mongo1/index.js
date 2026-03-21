@@ -38,7 +38,6 @@ app.post("/signup",async(req,res)=>{
     const {name,email,password} = req.body
 
     const userExist = userModel.findOne({email:email},);
-9
     await userModel.insert({
         email:email,
         name:name,
@@ -48,7 +47,20 @@ app.post("/signup",async(req,res)=>{
 })
 
 app.post("/signin",(req,res)=>{
-       
+    const {email,password} = req.body
+
+    userModel.findOne({email:email},(err,user)=>{
+        if(err){
+            res.send("email not found") 
+        } else if(user){
+            if(user.password === password){
+                res.send("signin successful")
+            } else {
+                res.send("invalid password")
+            }
+        }
+    })
+
 })
 
 app.get("/todos",(req,res)=>{
