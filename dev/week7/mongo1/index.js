@@ -60,13 +60,9 @@ app.post("/signin",(req,res)=>{
             }
         }
     })
-
 })
-
 app.get("/todos",(req,res)=>{
-
 })
-
 
 app.post("/todo",(req,res)=>{
     
