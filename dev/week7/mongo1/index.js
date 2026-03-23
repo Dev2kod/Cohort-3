@@ -34,15 +34,7 @@ userModel.findOne({email:email},(err,user)=>{
 })
 */
 
-app.post("/signup",async(req,res)=>{
-    const {name,email,password} = req.body
-
-    const userExist = userModel.findOne({email:email},);
-    await userModel.insert({
-        email:email,
-        name:name,
-        password:password  
-    })
+app.post("/signup",(req,res)=>{
 
 })
 
@@ -65,10 +57,11 @@ app.get("/todos",(req,res)=>{
 })
 
 app.post("/todo",(req,res)=>{
-    
-})
 
-console.log(process.env.MONGOOSE_STRING)
+})
+app.get("/getAllTodos",(req,res)=>{
+
+})
 
 
 app.listen(3000,()=>{
