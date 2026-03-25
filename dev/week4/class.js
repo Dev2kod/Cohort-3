@@ -31,5 +31,4 @@ class animal{
 
 const dog = new animal(4,"bhow bhow","retriever")
 console.log(dog.breed)
-
 const shape2 = new rectangle()
