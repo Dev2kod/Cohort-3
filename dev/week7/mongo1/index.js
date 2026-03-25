@@ -35,8 +35,17 @@ userModel.findOne({email:email},(err,user)=>{
 */
 
 app.post("/signup",(req,res)=>{
-
-})
+    const {name,email,password} = req.body
+    userModel.findOne({email:email},(err,user)=>{
+        if(err){
+            res.send("something went wrong")
+        } else if(user){
+            res.send("user already exists")
+        } else {
+            const newUser = new userModel({name,email,password})
+            newUser.save()
+            res.send("user created successfully")   
+}})})
 
 app.post("/signin",(req,res)=>{
     const {email,password} = req.body
