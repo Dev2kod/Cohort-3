@@ -66,7 +66,10 @@ app.get("/todos",(req,res)=>{
 })
 
 app.post("/todo",(req,res)=>{
-
+    const {userId,title,done} = req.body
+    const newTodo = new todoModel({userId,title,done})
+    newTodo.save()
+    res.send("todo created successfully")
 })
 app.get("/getAllTodos",(req,res)=>{
 
