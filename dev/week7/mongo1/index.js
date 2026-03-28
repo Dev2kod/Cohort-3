@@ -35,44 +35,21 @@ userModel.findOne({email:email},(err,user)=>{
 */
 
 app.post("/signup",(req,res)=>{
-    const {name,email,password} = req.body
-    userModel.findOne({email:email},(err,user)=>{
-        if(err){
-            res.send("something went wrong")
-        } else if(user){
-            res.send("user already exists")
-        } else {
-            const newUser = new userModel({name,email,password})
-            newUser.save()
-            res.send("user created successfully")   
-}})})
+})
 
 app.post("/signin",(req,res)=>{
-    const {email,password} = req.body
-
-    userModel.findOne({email:email},(err,user)=>{
-        if(err){
-            res.send("email not found") 
-        } else if(user){
-            if(user.password === password){
-                res.send("signin successful")
-            } else {
-                res.send("invalid password")
-            }
-        }
-    })
 })
 app.get("/todos",(req,res)=>{
 })
 
 app.post("/todo",(req,res)=>{
-    const {userId,title,done} = req.body
-    const newTodo = new todoModel({userId,title,done})
-    newTodo.save()
-    res.send("todo created successfully")
 })
 app.get("/getAllTodos",(req,res)=>{
 
+})
+
+app.post("/edittodos",(req,res)=>{
+    
 })
 
 
