@@ -14,6 +14,14 @@ userRouter.post("/signup",(req,res)=>{
     const email = req.body.email;
     const password = req.body.password;
     
+    const userExists = userModel.findOne({email:email});
+    if(userExists){
+        res.send("user already exists")
+    } else {
+        const newUser = new userModel({name,email,password})
+        newUser.save()
+        res.send("user created successfully")
+    }
 })
 
 
