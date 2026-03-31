@@ -2,7 +2,7 @@ const express = require("express")
 const {connectdb} = require("./db")
 const {userModel,todoModel} = require("./schema")
 const dotenv = require("dotenv")
-dotenv.config()
+ dotenv.config()
 
 const app = express()
 app.use(express.json())
@@ -39,44 +39,42 @@ app.post("/signup",async(req,res)=>{
     })
 })
 const jwt = require("jsonwebtoken")
+const { authMiddleware } = require("./authmiddleware")
 
 const JWT_SECRET = "123456"
 
 app.post("/signin", async (req,res)=>{
     const {email,password} = req.body
 
-    try {
+    const user = userModel.findone({email})
 
-        const user = await userModel.findOne({ email })
-
-        if(!user){
-            return res.status(404).json({
-                msg:"User does not exist"
-            })
-        }
-
-        if(user.password !== password){
-            return res.status(403).json({
-                msg:"Wrong password"
-            })
-        }
-
-        const token = jwt.sign(
-            { id: user._id },
-            JWT_SECRET
-        )
-
-        res.json({
-            msg:"User signed in",
-            token: token
+    if(!user){
+        return res.status(404).json({
+            msg: "user does not exist"
         })
-
-    } catch (error) {
-        res.status(500).json({
-            msg:"Server error"
-        })        
     }
+
+    if(user.password !== password){
+        return res.status(403).json({
+            msg:"wrong password,enter a correct one"
+        })
+    }
+    const token = jwt.sign({userId:user._id},JWT_SECRET)
+    res.json({
+        message:"user signed in",
+        token: token
+    })
 })
+
+app.get("/todos",authMiddleware,(req,res)=>{
+    
+    res.json({
+        todos: 
+    })
+})
+
+
+
 app.listen(3000,()=>{
     console.log("running on port 3000")
 })
