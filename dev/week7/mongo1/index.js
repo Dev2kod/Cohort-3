@@ -67,9 +67,10 @@ app.post("/signin", async (req,res)=>{
 })
 
 app.get("/todos",authMiddleware,(req,res)=>{
-    
+    const userId = req.userId
+    const todos = todoModel.find({userId:userId})
     res.json({
-        todos: 
+        todos: todos
     })
 })
 
