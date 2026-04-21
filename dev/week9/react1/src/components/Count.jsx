@@ -9,7 +9,7 @@ const Count = () => {
   return (<>
   <div className="flex flex-col gap-2 items-center justify-center">
     <div>{count}</div>
-    <button className="p-2 border-1" onClick={()=>{add1()}}>add 1</button>
+    <button className="p-2" onClick={()=>{add1()}}>add 1</button>
     </div>
 </>)
 }
