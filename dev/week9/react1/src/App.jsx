@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import './App.css'
-import Profile from './components/Profile'
-import Count from './components/Count'
-import ToggleMsg from './components/ToggleMsg'
-import Postlist from './components/Postlist'
+import Post from './components/Post'
 
-function App() {
+function App() { 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-center h-100vh bg-gray-300'>
     <div style={{display: "flex",justifyContent: "center", alignItems: "center",background: "#dfe6e9", height: "100vh" }}>
-      <Postlist/>
+      <Post title="Post1" body="this is the body of post 1"/>
     </div>
     </div>
   )
-}export default App
+}
+
+export default App
