@@ -8,9 +8,8 @@ const Postlist = () => {
 
   return (
     <div>
-        <button>add</button>
-        {postlist}
-        <Post/>
+    <button onClick={()=>addPost}>add</button>
+        postlist.map()
     </div>
   )
 }
