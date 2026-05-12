@@ -14,14 +14,23 @@
     <button  onclick="greet()">Add task</button>
     <br/>
     <h2>List of tasks</h2>
-    <div>code hard</div>
+<div id="todos">
+    <div>code hard  <button>delete todo</button></div>
     <div>ml model revision</div>
     <div>strong room confessions</div>
+</div>
 <script>
     const greet=()=>{
         const cons = document.getElementById("val")
         const todo = cons.value
         console.log(todo)
+         
+        const newdiv = document.createElement("div")
+        newdiv.innerHTML = todo
+        const parent = document.getElementById("todos")
+
+        parent.appendChild(newdiv)
+        
     }
 </script>
 </body>
