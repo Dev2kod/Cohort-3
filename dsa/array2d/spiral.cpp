@@ -27,7 +27,7 @@ int main(){
     }
     cout<<endl;
     colmax--;   
-   
+    
     for (int i = colmax; i >=colmin ; i--)
     {
         cout<<arr[rowmax][i];
