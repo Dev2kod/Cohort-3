@@ -1,14 +1,25 @@
 const express = require("express")
 
+const notes = [];
+
 const app = express()
 app.use(express.json())
 
 app.post("/notes",(req,res)=>{
-    // const title = req.body.title;
-    // const description = req.body.description;
+    const title = req.body.title;
+    const description = req.body.description;
 
-    console.log(req.body)
-    res.send(req.body)
+    notes.push({
+        title:title,
+        description:description
+    })
+
+})
+
+app.get("/notes",(req,res)=>{
+    res.json({
+        notes:notes
+    }).status(200)
 })
 
 
