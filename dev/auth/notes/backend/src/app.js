@@ -29,7 +29,7 @@ app.delete("/notes/:id",(req,res)=>{
     console.log(id)
    
     notes.splice(id,1)
-   
+    ;
     res.json({
         msg:"note deleted"
     })
