@@ -13,14 +13,32 @@ app.get("/",(req,res)=>{
     })
 })
 
-app.get("/notes",()=>{
-    res.json(notes);
+app.get("/notes",(req,res)=>{
+    res.status(200).json({
+        notes:notes
+    });
 })
 
 app.post("/notes",(req,res)=>{
 
     const {title,description} = req.body;
     
+    if(!title || !description){
+        res.status(400).json({
+            msg:"enter both title and description"
+        }) 
+    }
+    const note = {
+        title:title,
+        description:description
+    }
+
+    console.log(`note:${note}`)
+    notes.push(note)
+    res.status(200).json({
+        msg:"note added",
+        note:note
+    })
 })
 
 app.listen(3000,()=>{
