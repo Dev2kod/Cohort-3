@@ -1,9 +1,22 @@
 import express from "express"
 import dotenv from "dotenv"
 import connectdb from "./db.js";
+import Employee from "./models/Employee.js"
+
 const app = express();
 app.use(express.json())
 dotenv.config()
+
+
+app.post("/emmployees",async(req,res)=>{
+    const data = req.body;
+    const employee = new
+}
+)
+
+
+
+
 const startServer=async()=>{
     try {
         console.log("starting server")
