@@ -7,14 +7,26 @@ const app = express();
 app.use(express.json())
 dotenv.config()
 
+app.get("/",(req,res)=>{
+    res.json({
+        msg:"server running on 3000"
+    })
+})
 
-app.post("/emmployees",async(req,res)=>{
+app.post("/employees",async(req,res)=>{
     const data = req.body;
-    const employee = new
+    const employee = new Employee(data)
+
+    await employee.save()
+    try {
+        
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        })
+    }
 }
 )
-
-
 
 
 const startServer=async()=>{
