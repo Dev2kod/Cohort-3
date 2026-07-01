@@ -22,7 +22,7 @@ app.post("/employees",async(req,res)=>{
         await employee.save()
         
         res.status(200).json({
-            success:true,
+            success:true, 
             message:"employee created"
         })
     } catch (error) {
