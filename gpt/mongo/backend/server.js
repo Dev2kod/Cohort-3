@@ -13,6 +13,44 @@ app.get("/",(req,res)=>{
     })
 })
 
+app.get("/name",async(req,res)=>{
+    try {
+        const data = await Employee.find({name:"Devesh"})
+        if(data){
+        res.status(200).json({
+            success:true,
+            data:data
+        })}
+        else{
+            res.status(404).json({
+                message:"no data found"
+            })
+        }
+    } catch (error) {
+        res.json({
+            success:false,
+            error:error
+        })
+    }
+})
+
+app.get("/employees",async(req,res)=>{
+        try {
+            const data = await Employee.find()
+        
+            res.status(200).json({
+                success:true,
+                employees: data
+            })
+        } catch (error) {
+            res.status(501).json({
+                success:false,
+                error: error
+            })
+        }
+})
+
+
 app.post("/employees",async(req,res)=>{
     try {
     
