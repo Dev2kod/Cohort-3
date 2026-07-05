@@ -15,21 +15,19 @@ app.get("/",(req,res)=>{
 
 app.get("/name",async(req,res)=>{
     try {
-        const data = await Employee.find({name:"Devesh"})
-        if(data){
-        res.status(200).json({
-            success:true,
+        const data = await Employee.find({name:"Devesh"}).select("name department")
+        
+        console.log(data)
+        res.json({
+            success: true,
             data:data
-        })}
-        else{
-            res.status(404).json({
-                message:"no data found"
-            })
+        })
+
         }
-    } catch (error) {
+     catch (error) {
         res.json({
             success:false,
-            error:error
+            error:error.message
         })
     }
 })
