@@ -104,7 +104,12 @@ app.delete("/employees/:id",async(req,res)=>{
         const id = req.params.id;
 
         const deleteEmployee = await Employee.findByIdAndDelete(id)
+        res.status(200).json({
+            success:true,
+            deleted: id
+        })
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
             error:error
