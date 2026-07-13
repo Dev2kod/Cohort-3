@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectdb from "./db.js";
+import connectdb from "./config/db.js";
 import Employee from "./models/Employee.js";
+import { createEmployee } from "./controllers/employeeController.js";
 
 const app = express();
 app.use(express.json());
@@ -48,23 +49,7 @@ app.get("/employees", async (req, res) => {
   }
 });
 
-app.post("/employees", async (req, res) => {
-  try {
-    const data = req.body;
-    const employee = new Employee(data);
-
-    await employee.save();
-
-    res.status(200).json({
-      success: true,
-      message: "employee created",
-    });
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
-});
+app.post("/employees", createEmployee);
 
 app.put("/employees/:id", async (req, res) => {
   try {
@@ -118,8 +103,7 @@ app.delete("/employees/:id",async(req,res)=>{
     
 })
 
-const startServer = async () => {
-  try {
+try {
     console.log("starting server");
     await connectdb();
     await app.listen(3000, () => {
@@ -129,6 +113,3 @@ const startServer = async () => {
     console.log("server did not start");
     console.log(error.message);
   }
-};
-
-startServer();
