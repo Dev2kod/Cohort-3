@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { createEmployee } from "../controllers/employeeController";
+import { createEmployee } from "../controllers/employeeController.js";
 
-const router = Router();
+export const router = Router();
 
 router.post("/",createEmployee)
 

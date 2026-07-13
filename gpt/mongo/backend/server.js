@@ -3,10 +3,12 @@ import dotenv from "dotenv";
 import connectdb from "./config/db.js";
 import Employee from "./models/Employee.js";
 import { createEmployee } from "./controllers/employeeController.js";
+import {router as EmployeeRouter} from "./routes/employeeRoutes.js"
 
 const app = express();
 app.use(express.json());
 dotenv.config();
+app.use("/employees",EmployeeRouter )
 
 app.get("/", (req, res) => {
   res.json({
